@@ -18,5 +18,6 @@ for file in *.gz; do
 done
 
 cat prefix.list | sort |uniq > uniq_prefix.list
+cat uniq_prefix.list | cut -d '_' -f 1 | sort | uniq > uniq_samples.list
 rm prefix.list
 
