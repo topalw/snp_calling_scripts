@@ -11,19 +11,22 @@
 cd ..
 module load gcc
 module load samtools
+module load gatk
+module load openjdk/1.8.0_265-b01
 
 ### this is run /sample ###
-sample=$1
-files=`ls "$sample"*.sam`
-#echo $files
-outbam="$sample"_unsorted.bam
-sorted="$sample".bam
-
-samtools merge --threads 4 $outbam `find . -name "$sample*.sam"`
-samtools sort $outbam -o $sorted -@ 4
+sample=$1 #library ID
+files=`ls "$sample"*.bam` #list all files with LibraryId
+sorted="$sample".bam #sorted output + input to Mark duplicates
+output="$sample"_markdup.bam
+# merge bams + sort
+samtools merge --threads 4 `echo $files` | samtools sort -o $sorted -@ 4
+# index
 samtools index $sorted -@ 4
+# markduplicates
+gatk MarkDuplicatesSpark -I $sorted -O $output
 
 mkdir $sample 
-rm $files
-rm $outbam
+rm $sorted
+#rm $files
 mv $sample* $sample

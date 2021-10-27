@@ -3,8 +3,8 @@
 #SBATCH --time=02:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=24G
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=18G
 #SBATCH --job-name=Trimm
 #SBATCH --account jgoudet_barn_owl
 #SBATCH --mail-user topalei@gmail.com
@@ -26,7 +26,7 @@ forward_out_unpaired="$prefix"_R1_unpaired.fq.gz
 reverse_out_paired="$prefix"_R2_paired.fq.gz
 reverse_out_unpaired="$prefix"_R2_unpaired.fq.gz
 
-trimmomatic PE -threads 8 -phred33 $forward_in $reverse_in \
+trimmomatic PE -threads 4 -phred33 $forward_in $reverse_in \
 $forward_out_paired $forward_out_unpaired \
 $reverse_out_paired $reverse_out_unpaired \
 MINLEN:70 \

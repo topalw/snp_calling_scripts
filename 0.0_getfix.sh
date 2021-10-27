@@ -1,7 +1,8 @@
 #!/bin/bash
+# USAGE IS .sh links_file (relative to ../)
 cd ..
 
-awk '{print "wget -q " $1}' links2 | bash
+awk '{print "wget -q " $1}' $1 | bash
 touch *.gz
 
 echo 'Got files & touched them gently'
@@ -17,3 +18,5 @@ for file in *.gz; do
 done
 
 cat prefix.list | sort |uniq > uniq_prefix.list
+rm prefix.list
+
