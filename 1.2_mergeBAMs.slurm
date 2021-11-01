@@ -20,7 +20,7 @@ files=`ls "$sample"*.bam` #list all files with LibraryId
 sorted="$sample".bam #sorted output + input to Mark duplicates
 output="$sample"_markdup.bam
 # merge bams + sort
-samtools merge --threads 4 `echo $files` | samtools sort -o $sorted -@ 4
+samtools merge --threads 4 - `echo $files` | samtools sort -o $sorted -@ 4
 # index
 samtools index $sorted -@ 4
 # markduplicates
@@ -28,5 +28,6 @@ gatk MarkDuplicatesSpark -I $sorted -O $output
 
 mkdir $sample 
 rm $sorted
+rm "$sorted".bai
 #rm $files
 mv $sample* $sample
