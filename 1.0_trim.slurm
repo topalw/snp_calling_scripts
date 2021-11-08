@@ -7,8 +7,6 @@
 #SBATCH --mem=18G
 #SBATCH --job-name=Trimm
 #SBATCH --account jgoudet_barn_owl
-#SBATCH --mail-user topalei@gmail.com
-#SBATCH --mail-type FAIL
 
 # submission is accompanied by each element of uniq_prefix.list 
 prefix=$1
