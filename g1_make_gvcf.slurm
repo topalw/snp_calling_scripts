@@ -11,7 +11,7 @@
 cd ..
 module load gcc gatk
 module load openjdk/1.8.0_265-b01
-sample="$1"/"$1"_markdup.bam #input file 
+sample="$1"/"$1"_markdup_bqsr.bam #input file mardup_bqsr.bam
 ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta' # reference path (make relative!)
 interval='/users/atopalou/work/ref_genome_2020/contig_intervals/'"$2" # reference subset path (make relative!)
 
