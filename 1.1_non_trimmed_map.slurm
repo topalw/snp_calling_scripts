@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --partition cpu
-#SBATCH --time=04:00:00
+#SBATCH --time=06:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12
@@ -14,8 +14,8 @@ module load samtools
 
 # MAPPING
 prefix=$1
-in_forward="$prefix"_R1_paired.fq.gz
-in_reverse="$prefix"_R2_paired.fq.gz
+in_forward="$prefix"_R1.fastq.gz
+in_reverse="$prefix"_R2.fastq.gz
 ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta'
 mapped="$prefix"_mapped.sam
 
