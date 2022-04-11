@@ -8,8 +8,7 @@
 4. then map every resulting file back to reference 
 
 >for f in x*; do
->>sbatch 2.map_intervals.slurm $f 
->done
+>>sbatch 2.map_intervals.slurm $f ; done
 
 
 5. then merge alignments and create mask 
