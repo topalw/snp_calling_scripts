@@ -12,12 +12,12 @@ cd ..
 module load gcc gatk
 module load openjdk/1.8.0_265-b01
 ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta'
-interval="/users/atopalou/work/ref_genome_2020/contig_intervals/${1}.list"
+interval="snp_calling_scripts/contig_intervals/${2}_ss.list"
 #ls *.gvcf.gz > tmp.list
 
 gatk CombineGVCFs \
 	-R $ref \
-	-V tmp.list \
-	-L ${interval} \
-	-O founders_${1}.gvcf.gz
+	-V ${1} \
+	-L $interval \
+	-O new_intervals/ref_panel_full_${2}.gvcf.gz
 
