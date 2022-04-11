@@ -12,9 +12,9 @@ cd ..
 module load gcc gatk
 module load openjdk/1.8.0_265-b01
 #ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta'
-interval="/users/atopalou/work/ref_genome_2020/contig_intervals/${2}.list"
+interval="/users/atopalou/work/ref_genome_2020/contig_intervals/${2}_ss.list"
 
 gatk GenomicsDBImport \
 	-V $1 \
-	--genomicsdb-update-workspace-path ../genomic_DB_refpanel \
+	--genomicsdb-update-workspace-path ../genomic_DB_refpanel/genDB_${2} \
 	--intervals ${interval}

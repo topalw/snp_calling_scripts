@@ -7,19 +7,20 @@
 #SBATCH --mem=24G
 #SBATCH --job-name=getfq
 #SBATCH --account jgoudet_barn_owl
-#SBATCH --mail-user alexandros.topaloudis@unil.ch
-#SBATCH --mail-type FAIL
 
-# USAGE IS .sh links_file (relative to ../)
+# USAGE IS script links_file 
+
+# CARE that this script assumes that files are named Sample_lane_R1/R2).... 
+
 cd ..
 
 awk '{print "wget -q " $1}' $1 | bash
-touch *.gz
+touch *.gz # important so as not to remove old files in scratch
 
 echo 'Got files & touched them gently'
 
 for file in *.gz; do
-	run=`zcat $file | head -1 | cut -d ':' -f 2`
+	run=`zcat $file | head -1 | cut -d ':' -f 2` 
 	sample=`echo $file | cut -d '_' -f 1`
 	lane=`echo $file | cut -d '_' -f 2`
 	direction=`echo $file | cut -d '_' -f 3`
@@ -27,6 +28,8 @@ for file in *.gz; do
 	mv $file $new_name
 	echo "$sample"_"$run"_"$lane" >> prefix.list
 done
+
+# make auxillary files to submit later scripts 
 
 cat prefix.list | sort |uniq > uniq_prefix.list
 cat uniq_prefix.list | cut -d '_' -f 1 | sort | uniq > uniq_samples.list

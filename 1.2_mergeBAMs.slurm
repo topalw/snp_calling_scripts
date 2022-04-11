@@ -15,6 +15,8 @@ module load gatk
 module load openjdk/1.8.0_265-b01
 
 ### this is run /sample ###
+# like awk '{print "sbatch 1.2_mergeBAMs.slurm " $1}' uniq_samples.list | bash
+
 sample=$1 #library ID
 files=`ls "$sample"*.bam` #list all files with LibraryId
 sorted="$sample".bam #sorted output + input to Mark duplicates
@@ -28,6 +30,7 @@ gatk MarkDuplicatesSpark -I $sorted -O $output
 
 mkdir $sample 
 rm $sorted
-rm "$sorted".bai
+rm ${sorted}.bai
 #rm $files
-mv $sample* $sample
+mv ${sample}_* ${sample}/
+# added the _ to escape the error of trying to move the directory in itself ... check if it works 

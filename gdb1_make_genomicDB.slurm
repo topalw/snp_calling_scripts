@@ -11,7 +11,7 @@
 cd ..
 module load gcc gatk
 module load openjdk/1.8.0_265-b01
-# USAGE is .slurm path/to/file/list (or path/to/gvcf) interval_names
+# USAGE is .slurm path/to/file.list (or path/to/gvcf) interval_names
 #ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta'
 interval="contig_intervals/${2}_ss.list"
 

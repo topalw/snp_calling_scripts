@@ -15,6 +15,9 @@ module load samtools
 module load gatk
 module load openjdk/1.8.0_265-b01
 
+#This is run / sample name when samples are in directories after 1.2 ... 
+#care to give it the correct truthset... to improve input
+
 bam="$1"/"$1"_markdup.bam
 ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta'
 truth='/users/atopalou/work/truth_set.vcf.gz'

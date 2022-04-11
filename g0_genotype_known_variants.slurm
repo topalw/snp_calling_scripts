@@ -12,11 +12,13 @@ cd ..
 module load gcc gatk
 module load openjdk/1.8.0_265-b01
 
-#usage is .slurm SampleID 
+#usage is .slurm SampleID as long as sample files are in their folders through 1.2_mergeBAMs.slurm
 
 # this is a list of snps from a vcf file as scaffold:position
 variants='/users/atopalou/work/snps_to_genotype.list'
+
 ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta'
+
 # change these accordingly
 gvcf="$1"/"$1"_all.gvcf.gz
 vcf="$1"/"$1".vcf.gz

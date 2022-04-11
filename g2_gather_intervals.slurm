@@ -9,17 +9,16 @@
 #SBATCH --account jgoudet_barn_owl
 
 cd ..
+# run /sample
 module load gcc gatk
 module load openjdk/1.8.0_265-b01
-sample1="$1"/"$1"_1.list.gvcf.gz
-sample2="$1"/"$1"_2.list.gvcf.gz
-sample3="$1"/"$1"_3.list.gvcf.gz
-out="$1"/"$1"_all.gvcf.gz
+
+ls ${1}/*.gvcf.gz > ${1}/${1}.files.list
+out=${1}/${1}_all.gvcf.gz
+
 ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta' # make relative!
 
 gatk CombineGVCFs \
 	-R $ref \
-	--variant $sample1 \
-	--variant $sample2 \
-	--variant $sample3 \
+	--variant ${1}/${1}.files.list \
 	-O $out

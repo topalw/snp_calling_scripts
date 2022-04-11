@@ -9,6 +9,7 @@
 #SBATCH --account jgoudet_barn_owl
 
 # submission is accompanied by each element of uniq_prefix.list 
+# like > awk '{print "sbatch 1.0_trim.slurm " $1 }' ../uniq_prefix.list | bash
 prefix=$1
 cd ..
 
@@ -31,5 +32,4 @@ MINLEN:70 \
 ILLUMINACLIP:/software/UHTS/Analysis/trimmomatic/0.36/adapters/NexteraPE-PE.fa:2:30:10:3:"true"
 # for Old-libraries without plexwell use TruSeq3-PE-2.fa
 rm $forward_in $reverse_in $forward_out_unpaired $reverse_out_unpaired
-
 
