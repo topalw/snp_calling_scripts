@@ -4,13 +4,13 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=18G
+#SBATCH --mem=8G
 #SBATCH --job-name=Trimm
 #SBATCH --account jgoudet_barn_owl
 
 # submission is accompanied by each element of uniq_prefix.list 
 # like > awk '{print "sbatch 1.0_trim.slurm " $1 }' ../uniq_prefix.list | bash
-prefix=$1
+prefix=${1}
 cd ..
 
 source /dcsrsoft/spack/bin/setup_dcsrsoft 
