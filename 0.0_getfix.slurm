@@ -3,8 +3,8 @@
 #SBATCH --time=04:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=24G
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=8G
 #SBATCH --job-name=getfq
 #SBATCH --account jgoudet_barn_owl
 
@@ -14,7 +14,7 @@
 
 cd ..
 
-awk '{print "wget -q " $1}' $1 | bash
+awk '{print "wget -q " $1}' ${1}| bash
 touch *.gz # important so as not to remove old files in scratch
 
 echo 'Got files & touched them gently'
@@ -24,9 +24,9 @@ for file in *.gz; do
 	sample=`echo $file | cut -d '_' -f 1`
 	lane=`echo $file | cut -d '_' -f 2`
 	direction=`echo $file | cut -d '_' -f 3`
-	new_name="$sample"_"$run"_"$lane"_"$direction".fq.gz
+	new_name=${sample}_${run}_${lane}_${direction}.fq.gz
 	mv $file $new_name
-	echo "$sample"_"$run"_"$lane" >> prefix.list
+	echo ${sample}_${run}_${lane} >> prefix.list
 done
 
 # make auxillary files to submit later scripts 
