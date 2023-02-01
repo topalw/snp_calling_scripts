@@ -9,8 +9,8 @@
 #SBATCH --account jgoudet_barn_owl
 cd ..
 module load gcc
-module load bwa
-module load samtools
+module load bwa/0.7.17
+module load samtools/1.15.1
 
 # run like awk '{print "sbatch 1.1_map.slurm " $1}' ../uniq_prefix.list | bash
 
