@@ -29,7 +29,8 @@ trimmomatic PE -threads 4 -phred33 $forward_in $reverse_in \
 $forward_out_paired $forward_out_unpaired \
 $reverse_out_paired $reverse_out_unpaired \
 MINLEN:70 \
-ILLUMINACLIP:/software/UHTS/Analysis/trimmomatic/0.36/adapters/NexteraPE-PE.fa:2:30:10:3:"true"
+ILLUMINACLIP:/software/UHTS/Analysis/trimmomatic/0.36/adapters/TruSeq3-PE-2.fa:2:30:10:3:"true"
 # for Old-libraries without plexwell use TruSeq3-PE-2.fa
+# for New-libaries with plexwell use NexteraPE-PE.fa 
 rm $forward_in $reverse_in $forward_out_unpaired $reverse_out_unpaired
 

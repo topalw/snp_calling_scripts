@@ -39,7 +39,7 @@ samtools addreplacerg -r "ID:$ID" \
 	-r "CN:GTF" \
 	-r "LB:$SM" \
 	-r "PL:ILLUMINA" \
-	-r "PM:NovaSeq6000" \
+	-r "PM:HiSeq4000" \
 	-r "SM:$SM" \
 	$mapped | samtools sort -o $perf_lane_bam -O bam
 
