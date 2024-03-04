@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=8G
+#SBATCH --mem=2G
 #SBATCH --job-name=getfq
 #SBATCH --account jgoudet_barn_owl
 
