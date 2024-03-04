@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=24
-#SBATCH --mem=48G
+#SBATCH --mem=12G
 #SBATCH --job-name=map
 #SBATCH --account jgoudet_barn_owl
 cd ..
