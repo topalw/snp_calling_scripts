@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=24G
+#SBATCH --mem=4G
 #SBATCH --job-name=BQSR
 #SBATCH --account jgoudet_barn_owl
 
