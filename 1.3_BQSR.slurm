@@ -9,11 +9,7 @@
 #SBATCH --account jgoudet_barn_owl
 
 cd ..
-module load gcc
-module load r
-module load samtools
-module load gatk
-module load openjdk/1.8.0_265-b01
+module load gcc samtools gatk openjdk/1.8.0_265-b01 python 
 
 #This is run / sample name when samples are in directories after 1.2 ... 
 #care to give it the correct truthset... to improve input
