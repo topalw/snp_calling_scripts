@@ -10,8 +10,7 @@
 
 cd ..
 # run /sample
-module load gcc gatk
-module load openjdk/1.8.0_265-b01
+module load gcc gatk openjdk/1.8.0_265-b01 python
 
 ls ${1}/*.gvcf.gz > ${1}/${1}.files.list
 out=${1}/${1}_all.gvcf.gz
