@@ -12,8 +12,8 @@
 ## 
 
 cd ..
-module load gcc gatk
-module load openjdk/1.8.0_265-b01 python
+module load gcc gatk openjdk/1.8.0_265-b01 python
+
 sample="$1"/"$1"_markdup_bqsr.bam #input file mardup_bqsr.bam CARE FOR NAMING
 
 ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta' # reference path
