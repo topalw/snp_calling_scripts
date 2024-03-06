@@ -9,10 +9,7 @@
 #SBATCH --account jgoudet_barn_owl
 
 cd ..
-module load gcc
-module load samtools
-module load gatk
-module load openjdk/1.8.0_265-b01
+module load gcc samtools gatk openjdk/1.8.0_265-b01 python
 
 ### this is run /sample ###
 # like awk '{print "sbatch 1.2_mergeBAMs.slurm " $1}' uniq_samples.list | bash
