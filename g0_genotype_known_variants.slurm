@@ -4,13 +4,12 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=24G
+#SBATCH --mem=4G
 #SBATCH --job-name=GenotypeGVCF
 #SBATCH --account jgoudet_barn_owl
 
 cd ..
-module load gcc gatk
-module load openjdk/1.8.0_265-b01
+module load gcc gatk openjdk/1.8.0_265-b01 python
 
 #usage is .slurm SampleID as long as sample files are in their folders through 1.2_mergeBAMs.slurm
 
