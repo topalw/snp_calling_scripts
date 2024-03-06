@@ -9,8 +9,7 @@
 #SBATCH --account jgoudet_barn_owl
 
 cd ..
-module load gcc gatk
-module load openjdk/1.8.0_265-b01
+module load gcc gatk openjdk/1.8.0_265-b01 python
 ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta' 
 #interval=snp_calling_scripts/contig_intervals/${2}_ss.list #make relative!
 
