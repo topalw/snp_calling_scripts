@@ -3,44 +3,48 @@
 #SBATCH --time=04:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=24
-#SBATCH --mem=12G
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=8G
 #SBATCH --job-name=map
 #SBATCH --account jgoudet_barn_owl
-cd ..
-module load gcc
-module load bwa/0.7.17
-module load samtools/1.15.1
 
-# run like awk '{print "sbatch 1.1_map.slurm " $1}' ../uniq_prefix.list | bash
+module load bwa
+module load samtools
 
-# MAPPING
-prefix=$1
-in_forward="$prefix"_R1_paired.fq.gz
-in_reverse="$prefix"_R2_paired.fq.gz
-ref='/users/atopalou/work/ref_genome_2020/Tyto_reference_Jan2020.fasta'
-mapped="$prefix"_mapped.sam
+# SUBMIT script with the relative path to the trimmed R1 files ex $>  sbatch 1.1.map.slurm ../1.data/1.fq/ID1_whatever_R1.fq.gz 
+# WATCH OUT - the way the renaming works is that R1 is changed to R2
+# IF your directory contains 'R1' the code will fail
+# I suggest using directory ../1.data/1.fq or sth similar
 
-bwa mem -M -t 12 $ref $in_forward $in_reverse > $mapped
+# parameter 
+in_forward=${1}
+# make reverse name by changing R1 to R2 
+in_reverse=`echo $in_forward | sed 's/R1/R2/g'`
+#individual name
+individual=$(basename ${in_forward} | awk -F "_" '{print $1}')
+# make bam directory if it doesnt exist 
+if [ ! -e ../1.data/2.bam ] 
+then 
+	mkdir -p ../1.data/2.bam
+fi 
+# output will be there 
+outbam=../1.data/2.bam/${individual}.bam # OUT
 
-# this is not exactly optimized in storage space since it needs the sam file to read line1
-# maybe there is a way to optimize storage by only using bam and then samtools view | head -n 1 ... TO DO
-# add RG and make bam
-file=$in_forward
-individual=$(echo $file | awk -F"_" '{print $1}')
-l1=`zcat $file | head -1`
+# reference - 
+ref=/work/FAC/FBM/DEE/jgoudet/barn_owl/Common/ref_genome_2020/Tyto_reference_Jan2020.fasta
+# prep RG line for bam 
+l1=`zcat $in_forward | head -1` 
 ID=$(echo $l1 | awk -F":" '{print $2"."$3"."$4}')
 BC=$(echo $l1 | awk -F":" '{print $10}')
-SM=$individual
-perf_lane_bam="$prefix"_perf.bam
-
+# triple pipe where we map, add @RG and then sort into a bam file
+bwa mem -M -t 12 $ref $in_forward $in_reverse |\
 samtools addreplacerg -r "ID:$ID" \
-	-r "BC:$BC" \
-	-r "CN:GTF" \
-	-r "LB:$SM" \
-	-r "PL:ILLUMINA" \
-	-r "PM:HiSeq4000" \
-	-r "SM:$SM" \
-	$mapped | samtools sort -o $perf_lane_bam -O bam
+        -r "BC:$BC" \
+        -r "CN:GTF" \
+        -r "LB:$individual" \
+        -r "PL:ILLUMINA" \
+        -r "PM:NovaSeqX" \
+        -r "SM:$individual" \
+	- |\
+samtools sort -o $outbam -O bam - 
 
-rm $mapped

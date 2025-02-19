@@ -20,7 +20,7 @@ then
 fi
 # make qualimap report 
 
-qualimap bamqc -bam ${FILE} -gff ../0.lists/LG_scaffs.bed -nw 1000 \
+qualimap bamqc -c -bam ${FILE} -gff ../0.lists/LG_scaffs.bed -nw 1000 \
 -outdir ${myPATH}/stats/${SAMPLE} -nt 4 \
 -outformat PDF:HTML --java-mem-size=24G 
 
