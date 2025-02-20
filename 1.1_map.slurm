@@ -4,12 +4,11 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=8G
+#SBATCH --mem=14G
 #SBATCH --job-name=map
 #SBATCH --account jgoudet_barn_owl
 
-module load bwa
-module load samtools
+module load bwa gatk openjdk python samtools
 
 # SUBMIT script with the relative path to the trimmed R1 files ex $>  sbatch 1.1.map.slurm ../1.data/1.fq/ID1_whatever_R1.fq.gz 
 # WATCH OUT - the way the renaming works is that R1 is changed to R2
@@ -47,4 +46,9 @@ samtools addreplacerg -r "ID:$ID" \
         -r "SM:$individual" \
 	- |\
 samtools sort -o $outbam -O bam - 
+
+# markduplicates
+# output 
+output=../1.data/2.bam/${individual}_markdup.bam
+gatk --java-options  "-Xmx12G" MarkDuplicatesSpark -I ${outbam} -O ${output}
 
