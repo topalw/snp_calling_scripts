@@ -44,11 +44,11 @@ samtools addreplacerg -r "ID:$ID" \
         -r "PL:ILLUMINA" \
         -r "PM:NovaSeqX" \
         -r "SM:$individual" \
-	- |\
-samtools sort -o $outbam -O bam - 
+	-@ 12 - |\
+samtools sort -@ 12 -o $outbam -O bam - 
 
 # markduplicates
 # output 
 output=../1.data/2.bam/${individual}_markdup.bam
-gatk --java-options  "-Xmx12G" MarkDuplicatesSpark -I ${outbam} -O ${output}
+gatk --java-options  "-Xmx14G" MarkDuplicatesSpark -I ${outbam} -O ${output}
 
